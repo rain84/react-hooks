@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, Link } from 'react-router-dom'
+import { HeavyComponent } from 'components'
+import styles from './App.module.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+	<div className={styles.app}>
+		<header className={styles.header}>
+			<p>React Hooks</p>
+		</header>
+		<main className={styles.main}>
+			<aside className={styles.menu}>
+				<Link to="/useShouldRender" className={styles.link}>
+					useShouldRender
+				</Link>
+			</aside>
+			<section className={styles.content}>
+				<Switch>
+					<Route path="/useShouldRender" component={HeavyComponent} />
+					<Route path="/" />
+				</Switch>
+			</section>
+		</main>
+		<footer className={styles.footer} />
+	</div>
+)
 
-export default App;
+export default App
