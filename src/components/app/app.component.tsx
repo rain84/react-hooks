@@ -1,17 +1,15 @@
-import { Switch, Route, Link } from 'react-router-dom'
-import { HeavyComponent } from 'components'
-import styles from './App.module.css'
+import { Switch, Route } from 'react-router-dom'
+import { HeavyComponent, Menu } from 'components'
+import styles from './app.module.css'
 
-const App = () => (
+export const App = () => (
 	<div className={styles.app}>
 		<header className={styles.header}>
 			<p>React Hooks</p>
 		</header>
 		<main className={styles.main}>
-			<aside className={styles.menu}>
-				<Link to="/useShouldRender" className={styles.link}>
-					useShouldRender
-				</Link>
+			<aside>
+				<Menu />
 			</aside>
 			<section className={styles.content}>
 				<Switch>
@@ -23,5 +21,3 @@ const App = () => (
 		<footer className={styles.footer} />
 	</div>
 )
-
-export default App

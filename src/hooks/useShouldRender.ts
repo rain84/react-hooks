@@ -8,8 +8,6 @@ export const useShouldRender = (...deps: Dependencies) => {
 	const [shouldRender, setShouldRender] = useState<Boolean>(isDepsResolved)
 
 	if (!shouldRender && isDepsResolved) {
-		console.log('!shouldRender && isDepsResolved')
-
 		setShouldRender(true)
 	}
 

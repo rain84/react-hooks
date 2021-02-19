@@ -5,8 +5,6 @@ export const HeavyComponent = () => {
 	const counter = useCounter(0)
 	const shouldRender = useShouldRender(heavyResult)
 
-	if (shouldRender) console.log(`shouldRender: ${shouldRender.toString()}, counter.current: ${counter.current}`)
-
 	return (
 		shouldRender && (
 			<div>
