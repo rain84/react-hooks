@@ -1,3 +1,4 @@
-export { HeavyComponent } from './heavy-component/heavy-component'
-export { App } from './app/app.component'
-export { Menu } from './menu/menu.component'
+export * from './heavy-component/heavy-component'
+export * from './app/app.component'
+export * from './menu/menu.component'
+export * as ui from './ui'
