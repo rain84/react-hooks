@@ -1,22 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 type THook = (key: string, initialValue: unknown) => ReturnType<typeof useState>
 
 export const useLocalStorage: THook = (key, initialValue) => {
 	const [value, update] = useState(() => {
-		let value
+		let value = window.localStorage.getItem(key)
+
+		if (!value) return initialValue
 
 		try {
-			value = JSON.parse(window.localStorage.getItem(key) || '""')
-		} catch {}
-
-		return value || initialValue
+			return JSON.parse(value)
+		} catch {
+			window.localStorage.removeItem(key)
+			return initialValue
+		}
 	})
 
+	const prevKey = useRef(key)
+
 	useEffect(() => {
-		try {
-			window.localStorage.setItem(key, JSON.stringify(value))
-		} catch {}
+		if (prevKey.current !== key) {
+			window.localStorage.removeItem(prevKey.current)
+			prevKey.current = key
+		}
+
+		window.localStorage.setItem(key, JSON.stringify(value))
 	}, [key, value])
 
 	return [value, update]
