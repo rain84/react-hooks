@@ -1,24 +1,40 @@
+// TODO: 1) different sections for different history entries.
+// TODO: 2) fixation of init data, and default reset()-behavior with init data
+// TODO: 3) option for cache restrictions
+
 import { useState, useEffect, useRef, useMemo, useCallback, useContext, createContext } from 'react'
 
 const HistoryContext = createContext()
 
 export const HistoryProvider = ({ children }) => {
-	const [historyStorage, setHistory] = useState([])
+	const [historyCache, setHistory] = useState([])
 	const [cursor, setCursor] = useState(-1)
-	const { length } = historyStorage
+	const { length } = historyCache
 
 	const pushState = useRef((nextState) => {
 		setCursor((cursor) => cursor + 1)
 		setHistory((storage) => [...storage, nextState])
 	}).current
 
-	const back = useCallback(() => {
-		if (0 < cursor) setCursor((cursor) => cursor - 1)
-	}, [cursor])
+	const back = useCallback(
+		(step = 1) => {
+			let nextCursor = cursor - step
+			if (nextCursor < 0) nextCursor = 0
 
-	const forward = useCallback(() => {
-		if (cursor < length - 1) setCursor((cursor) => cursor + 1)
-	}, [cursor, length])
+			setCursor(nextCursor)
+		},
+		[cursor]
+	)
+
+	const forward = useCallback(
+		(step = 1) => {
+			let nextCursor = cursor + step
+			if (length <= nextCursor) nextCursor = length - 1
+
+			setCursor(nextCursor)
+		},
+		[cursor, length]
+	)
 
 	const reset = useRef((val = null) => {
 		setCursor(0)
@@ -26,9 +42,8 @@ export const HistoryProvider = ({ children }) => {
 	}).current
 
 	const API = useMemo(() => ({ pushState, back, forward, reset }), [pushState, back, forward, reset])
-	const state = historyStorage[cursor]
+	const state = historyCache[cursor]
 	const history = [state, API]
-	console.log(historyStorage, cursor)
 
 	return <HistoryContext.Provider value={history}>{children}</HistoryContext.Provider>
 }
