@@ -1,6 +1,8 @@
 import { Switch, Route } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { HeavyComponent, HeavyComponentLazy, Menu } from 'components'
+import { TestPage } from 'components/pages'
+import { ROUTES } from 'routes'
 
 const StyledApp = styled.section`
 	background-color: #282c34;
@@ -57,9 +59,10 @@ export const App = () => (
 			</Sidepanel>
 			<Content>
 				<Switch>
-					<Route path="/useShouldRender" component={HeavyComponent} />
-					<Route path="/heavyComponentSuspense" component={HeavyComponentLazy} />
-					<Route path="/" />
+					<Route path={ROUTES.HOOK_USE_SHOULD_RENDER} component={HeavyComponent} />
+					<Route path={ROUTES.HOOK_HEAVY_COMPONENT_SUSPENSE} component={HeavyComponentLazy} />
+					<Route path={ROUTES.TEST_PAGE} component={TestPage} />
+					<Route path="/" render={() => <p>Collection of React-Hooks</p>} />
 				</Switch>
 			</Content>
 		</Main>

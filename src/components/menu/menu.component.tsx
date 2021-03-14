@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { ROUTES } from 'routes'
 
 const StyledLink = styled(Link)`
 	text-decoration: none;
@@ -25,8 +26,9 @@ const StyledSection = styled.section`
 
 export const Menu = () => (
 	<StyledSection>
-		<StyledLink to="/">Home 🏡</StyledLink>
-		<StyledLink to="/useShouldRender">useShouldRender</StyledLink>
-		<StyledLink to="/heavyComponentSuspense">HeavyComponent with Suspence</StyledLink>
+		<StyledLink to={ROUTES.HOME}>Home 🏡</StyledLink>
+		<StyledLink to={ROUTES.HOOK_USE_SHOULD_RENDER}>useShouldRender</StyledLink>
+		<StyledLink to={ROUTES.HOOK_HEAVY_COMPONENT_SUSPENSE}>HeavyComponent with Suspence</StyledLink>
+		<StyledLink to={ROUTES.TEST_PAGE}>TestPage</StyledLink>
 	</StyledSection>
 )
