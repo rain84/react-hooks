@@ -29,6 +29,7 @@ export const Menu = () => (
 		<StyledLink to={ROUTES.HOME}>Home 🏡</StyledLink>
 		<StyledLink to={ROUTES.HOOK_USE_SHOULD_RENDER}>useShouldRender</StyledLink>
 		<StyledLink to={ROUTES.HOOK_HEAVY_COMPONENT_SUSPENSE}>HeavyComponent with Suspence</StyledLink>
+		<StyledLink to={ROUTES.HOOK_USE_STATE_WITH_PREV}>Use state with prevState</StyledLink>
 		<StyledLink to={ROUTES.TEST_PAGE}>TestPage</StyledLink>
 	</StyledSection>
 )
