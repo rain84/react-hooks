@@ -1,4 +1,5 @@
-export * from './heavy-component/heavy-component'
+export * from './heavy-component'
 export * from './app/app.component'
-export * from './menu/menu.component'
+export * from './menu'
+export * from './state-with-prev'
 export * as ui from './ui'

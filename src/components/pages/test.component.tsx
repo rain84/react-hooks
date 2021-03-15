@@ -1,15 +1,26 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
-export function Counter({ initialCount }: { initialCount: number }) {
-	const [count, setCount] = useState<number>(initialCount)
-	return (
-		<>
-			Count: {count}
-			<button onClick={() => setCount(initialCount)}>Reset</button>
-			<button onClick={() => setCount(count - 1)}>-</button>
-			<button onClick={() => setCount(count + 1)}>+</button>
-		</>
-	)
+function Clock() {
+	const [time, setTime] = useState(new Date())
+	const format = useRef(
+		(time: Date) =>
+			`${[time.getHours(), time.getMinutes(), time.getSeconds()]
+				.map((val) => val.toString().padStart(2, '0'))
+				.join(' - ')}`
+	).current
+
+	useEffect(() => {
+		const id = setInterval(() => {
+			setTime(new Date())
+		}, 1000)
+		return () => clearInterval(id)
+	}, [time])
+
+	return <h1>{format(time)}</h1>
 }
 
-export const TestPage = () => <Counter initialCount={0} />
+export const TestPage = () => (
+	<>
+		<Clock />
+	</>
+)
