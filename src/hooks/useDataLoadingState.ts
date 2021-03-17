@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { useStateWithPrev } from 'hooks/useStateWithPrev'
 
-export const useDataLoadingState = <T extends unknown>(init: T) => {
+export const useDataLoadingState = <T extends unknown>(initialData: T) => {
 	const def = {
 		pristine: false,
 		loading: false,
@@ -8,29 +9,30 @@ export const useDataLoadingState = <T extends unknown>(init: T) => {
 		error: false
 	}
 
-	const prevInit = useRef<T | undefined>()
+	const [, prevInit, updatePrev] = useStateWithPrev<T>(initialData)
+	const isPristine = () => prevInit === undefined || prevInit !== initialData
 
-	const isPristine = () => prevInit.current === undefined || prevInit.current !== init
+	useEffect(() => {
+		if (isPristine()) {
+			setState({ ...def, pristine: true })
+			updatePrev(initialData)
+		}
+		// eslint-disable-next-line
+	}, [initialData])
+
 	const [state, setState] = useState({
 		...def,
 		pristine: isPristine()
 	})
 
-	useEffect(() => {
-		prevInit.current = init
-
-		if (isPristine()) {
-			setState({ ...def, pristine: true })
-		}
-
-		// eslint-disable-next-line
-	}, [init])
-
 	const API = {
-		loading: () => setState((s) => ({ ...def, loading: true, pristine: s.pristine })),
-		success: () => setState({ ...def, success: true }),
-		error: () => setState({ ...def, error: true })
+		setLoading: () => setState((s) => ({ ...def, loading: true, pristine: s.pristine })),
+		setSuccess: () => setState({ ...def, success: true }),
+		setError: () => setState({ ...def, error: true })
 	}
 
-	return { is: state, set: API }
+	return {
+		is: state,
+		...API
+	}
 }
