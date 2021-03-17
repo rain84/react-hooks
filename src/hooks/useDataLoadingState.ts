@@ -6,7 +6,7 @@ export const useDataLoadingState = <T extends unknown>(initialData: T) => {
 		pristine: false,
 		loading: false,
 		success: false,
-		error: false
+		error: null
 	}
 
 	const [, prevInit, updatePrev] = useStateWithPrev<T>(initialData)
@@ -28,7 +28,7 @@ export const useDataLoadingState = <T extends unknown>(initialData: T) => {
 	const API = {
 		setLoading: () => setState((s) => ({ ...def, loading: true, pristine: s.pristine })),
 		setSuccess: () => setState({ ...def, success: true }),
-		setError: () => setState({ ...def, error: true })
+		setError: (e) => setState({ ...def, error: e })
 	}
 
 	return {
