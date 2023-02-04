@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react'
 import { useStateWithPrev } from 'hooks/useStateWithPrev'
 
+interface ShapeOfState {
+	pristine: boolean
+	loading: boolean
+	success: boolean
+	error: null | Error
+}
+
 export const useDataLoadingState = <T extends unknown>(initialData: T) => {
-	const def = {
+	const def: ShapeOfState = {
 		pristine: false,
 		loading: false,
 		success: false,
@@ -28,7 +35,7 @@ export const useDataLoadingState = <T extends unknown>(initialData: T) => {
 	const API = {
 		setLoading: () => setState((s) => ({ ...def, loading: true, pristine: s.pristine })),
 		setSuccess: () => setState({ ...def, success: true }),
-		setError: (e) => setState({ ...def, error: e })
+		setError: (e: Error) => setState({ ...def, error: e })
 	}
 
 	return {
