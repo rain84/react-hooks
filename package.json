@@ -4,6 +4,15 @@
 	"homepage": "https://rain84.github.io/react-hooks",
 	"private": true,
 	"dependencies": {
+		"node-sass": "^8.0.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.8.0",
+		"react-scripts": "5.0.1",
+		"styled-components": "^5.3.6",
+		"web-vitals": "^3.1.1"
+	},
+	"devDependencies": {
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^14.4.3",
@@ -14,14 +23,7 @@
 		"@types/react-router-dom": "^5.3.3",
 		"@types/styled-components": "^5.1.26",
 		"gh-pages": "^5.0.0",
-		"node-sass": "^8.0.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.8.0",
-		"react-scripts": "5.0.1",
-		"styled-components": "^5.3.6",
-		"typescript": "^4.9.5",
-		"web-vitals": "^3.1.1"
+		"typescript": "^4.9.5"
 	},
 	"scripts": {
 		"start": "react-scripts start",
