@@ -1,7 +1,6 @@
-import { Switch, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { HeavyComponent, HeavyComponentLazy, Menu, CounterWithPrevState } from 'components'
-import { TestPage } from 'components/pages'
+import { HeavyComponent, HeavyComponentLazy, Menu, CounterWithPrevState} from 'components'
 import { ROUTES } from 'routes'
 
 const StyledApp = styled.section`
@@ -58,13 +57,12 @@ export const App = () => (
 				<Menu />
 			</Sidepanel>
 			<Content>
-				<Switch>
-					<Route path={ROUTES.HOOK_USE_SHOULD_RENDER} component={HeavyComponent} />
-					<Route path={ROUTES.HOOK_HEAVY_COMPONENT_SUSPENSE} component={HeavyComponentLazy} />
-					<Route path={ROUTES.HOOK_USE_STATE_WITH_PREV} component={CounterWithPrevState} />
-					<Route path={ROUTES.TEST_PAGE} component={TestPage} />
-					<Route path="/" render={() => <p>Collection of React-Hooks 🪝</p>} />
-				</Switch>
+				<Routes>
+					<Route path={ROUTES.HOOK_USE_SHOULD_RENDER} element={<HeavyComponent/>} />
+					<Route path={ROUTES.HOOK_HEAVY_COMPONENT_SUSPENSE} element={<HeavyComponentLazy/>} />
+					<Route path={ROUTES.HOOK_USE_STATE_WITH_PREV} element={<CounterWithPrevState/>} />
+					<Route path="/" element={<p>Collection of React-Hooks 🪝</p>} />
+				</Routes>
 			</Content>
 		</Main>
 		<Footer />
